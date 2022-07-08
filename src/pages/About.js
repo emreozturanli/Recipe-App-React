@@ -1,4 +1,4 @@
-import StyledAbout from "../styles/AboutStyle"
+import StyledAbout from "../styles/About.styled"
 
 const About = () => {
   return (

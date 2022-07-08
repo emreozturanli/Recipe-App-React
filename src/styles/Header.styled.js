@@ -26,7 +26,7 @@ export const StyledNav = styled.nav`
         flex-direction:column;
         align-items:center;
         justify-content:center;
-        position:absolute;
+        position:fixed;
         left:0;
         top:0;
         transform: translate(-50%, -50%);

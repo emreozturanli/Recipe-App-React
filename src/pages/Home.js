@@ -1,6 +1,5 @@
 import axios from 'axios';
-import React from 'react'
-import { useEffect } from 'react';
+import React from 'react';
 import { useState } from 'react';
 import RecipeCard from '../components/RecipeCard';
 import { Recipes, StyledMain } from '../styles/Home.styled';
@@ -13,6 +12,7 @@ const Home = () => {
   const [recipes, setRecipes] = useState([]);
   const [mealType, setMealType] =useState('');
   const [query, setQuery] = useState(''); 
+  const [isLoading, setIsLoading] = useState(false)
 
   const url = `https://api.edamam.com/search?q=${query}&app_id=${appId}&app_key=${appKey}&mealType=${mealType}`;
 
@@ -20,18 +20,26 @@ const Home = () => {
     try {
         const {data} = await axios.get(url);
         setRecipes(data.hits)
-        console.log(recipes);
         setMealType('');
         setQuery('');
+        setIsLoading(false)
     } catch (error) {
       return <Error/>
     }
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    setIsLoading(true)
+    getRecipes()
+  }
+
+
+
   return (
     <StyledMain>
       <h1>Delicious Recipes for You</h1>
-      <form onSubmit={(e)=> {e.preventDefault(); getRecipes()}}>
+      <form onSubmit={handleSubmit}>
         <input 
         type="text" 
         name="query" 
@@ -55,6 +63,7 @@ const Home = () => {
 
       <Recipes>
         {
+        isLoading ? <h1>Loading...</h1> :
           recipes.map((item,index)=>{
             return <RecipeCard key={index} recipe={item.recipe}/>
           })
