@@ -21,7 +21,7 @@ const About = () => {
         <div >
           <h3>USEFULL LINKS</h3>
           <ul>
-            <li><a href="https://github.com/emreozturanli/Countries-React-Router">Source Code</a></li>
+            <li><a href="https://github.com/emreozturanli/Recipe-App-React">Source Code</a></li>
             <li><a href="https://github.com/emreozturanli">My GitHub</a></li>
           </ul>
         </div>
