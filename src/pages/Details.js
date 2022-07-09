@@ -9,7 +9,7 @@ const Details = () => {
   
   return (
     <StyledDetails>
-      <h1>{state.recipe.label}</h1>
+      <h1>{label}</h1>
       <DetailsMain>
         <img src={state.recipe.image} alt={state.recipe.label} />
         <LeftInfo>

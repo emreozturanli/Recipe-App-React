@@ -2,9 +2,11 @@ import styled from 'styled-components';
 
 export const StyledError = styled.div`
     padding: 2rem;
-
+    max-width:400px;
+    margin: auto;
     h4{
         text-align:center;
+        color: red;
     }
 
     p{
