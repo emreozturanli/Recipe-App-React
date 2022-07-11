@@ -2,7 +2,6 @@ import axios from 'axios';
 import {  useState } from 'react';
 import RecipeCard from '../components/RecipeCard';
 import { Recipes, StyledMain } from '../styles/Home.styled';
-import Error from './Error';
 
 const appId = 'a864e07d';
 const appKey = 'b4c3995161f660911c12fd38c3096d52';
@@ -11,7 +10,8 @@ const Home = () => {
   const [recipes, setRecipes] = useState([]);
   const [mealType, setMealType] =useState('breakfast');
   const [query, setQuery] = useState('chicken'); 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
   const url = `https://api.edamam.com/search?q=${query}&app_id=${appId}&app_key=${appKey}&mealType=${mealType}`;
 
@@ -20,8 +20,9 @@ const Home = () => {
         const {data} = await axios.get(url);
         setRecipes(data.hits)
         setIsLoading(false)
+        data.hits.length === 0 ? setNotFound(true) : setNotFound(false)
     } catch (error) {
-      return  <Error/>
+      console.log(error)
     }
   }
 
@@ -30,7 +31,7 @@ const Home = () => {
     setIsLoading(true)
     getRecipes()
   }
-
+console.log(recipes);
   return (
     <StyledMain>
       <h1>Delicious Recipes for You</h1>
@@ -58,7 +59,8 @@ const Home = () => {
 
       <Recipes>
         {
-        isLoading ? <h1>Loading...</h1> : 
+         isLoading ? <h1>Loading...</h1> : 
+          notFound ? <h1>not found</h1> :
           recipes.map((item,index)=>{
             return <RecipeCard key={index} recipe={item.recipe}/>
           })
