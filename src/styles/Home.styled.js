@@ -44,7 +44,7 @@ export const Recipes = styled.section`
     justify-content:center;
     align-items:center;
     gap:1rem;
-
+    margin-bottom:2rem;
     @media (min-width: 600px) {
         flex-direction:row;
     }
@@ -56,6 +56,7 @@ export const StyledRecipeCard = styled.div`
     background-color:#fff;
     border-radius:10px;
     width:330px;
+    height:470px;
     a{
         text-decoration:none;
     }
@@ -68,6 +69,7 @@ export const StyledRecipeCard = styled.div`
         display:block;
         border-radius:30px;
         margin: 1rem 0;
+        width: 300px;
     }
 
     button{
