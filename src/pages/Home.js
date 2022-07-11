@@ -1,6 +1,5 @@
 import axios from 'axios';
-import React from 'react';
-import { useState } from 'react';
+import {  useState } from 'react';
 import RecipeCard from '../components/RecipeCard';
 import { Recipes, StyledMain } from '../styles/Home.styled';
 import Error from './Error';
@@ -10,8 +9,8 @@ const appKey = 'b4c3995161f660911c12fd38c3096d52';
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
-  const [mealType, setMealType] =useState('');
-  const [query, setQuery] = useState(''); 
+  const [mealType, setMealType] =useState('breakfast');
+  const [query, setQuery] = useState('chicken'); 
   const [isLoading, setIsLoading] = useState(false)
 
   const url = `https://api.edamam.com/search?q=${query}&app_id=${appId}&app_key=${appKey}&mealType=${mealType}`;
@@ -20,11 +19,9 @@ const Home = () => {
     try {
         const {data} = await axios.get(url);
         setRecipes(data.hits)
-        setMealType('');
-        setQuery('');
         setIsLoading(false)
     } catch (error) {
-      return <Error/>
+      return  <Error/>
     }
   }
 
@@ -33,8 +30,6 @@ const Home = () => {
     setIsLoading(true)
     getRecipes()
   }
-
-
 
   return (
     <StyledMain>
@@ -63,7 +58,7 @@ const Home = () => {
 
       <Recipes>
         {
-        isLoading ? <h1>Loading...</h1> :
+        isLoading ? <h1>Loading...</h1> : 
           recipes.map((item,index)=>{
             return <RecipeCard key={index} recipe={item.recipe}/>
           })
