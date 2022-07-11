@@ -1,15 +1,18 @@
 import React from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation} from 'react-router-dom'
 import { DetailsMain, LeftInfo, RightInfo, StyledDetails } from '../styles/Details.styled';
+import Error from './Error';
 
 const Details = () => {
-  const {label} = useParams();
   const {state} = useLocation()
 
+  if(state === null ){
+    return <Error/>
+  }
   
   return (
     <StyledDetails>
-      <h1>{label}</h1>
+      <h1>{state.recipe.label}</h1>
       <DetailsMain>
         <img src={state.recipe.image} alt={state.recipe.label} />
         <LeftInfo>
